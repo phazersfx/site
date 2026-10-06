@@ -197,6 +197,7 @@
             <!-- Desktop Nav -->
             <nav class="hidden md:flex gap-8 text-sm font-medium text-gray-300">
                 <a href="#services" class="hover:text-white transition-colors">Servicios</a>
+                <a href="#fotos" class="hover:text-white transition-colors">Fotos</a>
                 <a href="#projects" class="hover:text-white transition-colors">Reels</a>
                 <a href="#color" class="hover:text-white transition-colors">Color</a>
                 <a href="#musica" class="hover:text-white transition-colors">Música</a>
@@ -230,6 +231,7 @@
         </button>
         
         <a href="#services" class="mobile-link text-3xl font-bold text-white hover:text-brand-500 transition-colors">Servicios</a>
+        <a href="#fotos" class="mobile-link text-3xl font-bold text-white hover:text-brand-500 transition-colors">Fotos</a>
         <a href="#projects" class="mobile-link text-3xl font-bold text-white hover:text-brand-500 transition-colors">Reels</a>
         <a href="#color" class="mobile-link text-3xl font-bold text-white hover:text-brand-500 transition-colors">Color</a>
         <a href="#musica" class="mobile-link text-3xl font-bold text-white hover:text-brand-500 transition-colors">Música</a>
@@ -244,15 +246,24 @@
         <div class="absolute inset-0 z-0 bg-surface-800 pointer-events-none">
             <video 
                 id="hero-video"
-                src="resources/videos/idea.mp4" 
+                data-src-mobile="resources/videos/fondo-movil.mp4"
+                data-src-desktop="resources/videos/fondo-escritorio.mp4"
+                poster="resources/videos/fondo-poster.jpg"
                 autoplay 
                 loop 
                 muted 
                 playsinline 
                 webkit-playsinline
                 preload="auto"
-                class="w-full h-full object-cover opacity-40 pointer-events-none">
+                class="w-full h-full object-cover opacity-60 pointer-events-none">
             </video>
+            <script>
+                // Vertical cut on portrait screens, horizontal crop elsewhere
+                (function() {
+                    const v = document.getElementById('hero-video');
+                    v.src = window.matchMedia('(max-aspect-ratio: 1/1)').matches ? v.dataset.srcMobile : v.dataset.srcDesktop;
+                })();
+            </script>
             <div class="absolute inset-0 bg-gradient-to-t from-surface-900 via-transparent to-surface-900/50"></div>
             <div class="absolute inset-0 bg-gradient-to-r from-surface-900 via-transparent to-transparent"></div>
         </div>
@@ -383,6 +394,36 @@
             </div>
         </div>
     </section>
+
+    <!-- Fotos -->
+    <section id="fotos" class="py-24 md:py-32 bg-surface-900 border-t border-surface-800">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="mb-12 reveal">
+                <h2 class="text-3xl md:text-5xl font-bold tracking-tight mb-4">Fotos</h2>
+                <div class="w-12 h-1 bg-brand-500 mb-4"></div>
+                <p class="text-gray-400 max-w-md">Fotografía de producto con iluminación cuidada y color propio.</p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 reveal">
+                <button class="foto-item group relative aspect-video overflow-hidden rounded border border-surface-700 bg-black" data-full="resources/photos/foto-01.jpg" aria-label="Ver foto 1">
+                    <img src="resources/photos/foto-01.jpg" alt="Fotografía de producto 1" loading="lazy" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                </button>
+                <button class="foto-item group relative aspect-video overflow-hidden rounded border border-surface-700 bg-black" data-full="resources/photos/foto-02.jpg" aria-label="Ver foto 2">
+                    <img src="resources/photos/foto-02.jpg" alt="Fotografía de producto 2" loading="lazy" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                </button>
+                <button class="foto-item group relative aspect-video overflow-hidden rounded border border-surface-700 bg-black" data-full="resources/photos/foto-03.jpg" aria-label="Ver foto 3">
+                    <img src="resources/photos/foto-03.jpg" alt="Fotografía de producto 3" loading="lazy" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                </button>
+                <button class="foto-item group relative aspect-video overflow-hidden rounded border border-surface-700 bg-black" data-full="resources/photos/foto-04.jpg" aria-label="Ver foto 4">
+                    <img src="resources/photos/foto-04.jpg" alt="Fotografía de producto 4" loading="lazy" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fotos lightbox -->
+    <div id="foto-lightbox" class="fixed inset-0 z-[120] hidden bg-black/95 flex items-center justify-center p-4 cursor-zoom-out">
+        <img id="foto-lightbox-img" src="" alt="Fotografía ampliada" class="max-w-full max-h-full object-contain">
+    </div>
 
     <!-- Projects -->
     <section id="projects" class="py-24 md:py-32 bg-surface-900 border-t border-surface-800">
@@ -1059,6 +1100,20 @@
             el.addEventListener('pointerup', () => { dragging = false; });
             el.addEventListener('pointercancel', () => { dragging = false; });
         }
+
+        // Photo lightbox
+        (function() {
+            const box = document.getElementById('foto-lightbox');
+            const img = document.getElementById('foto-lightbox-img');
+            document.querySelectorAll('.foto-item').forEach((b) => b.addEventListener('click', () => {
+                img.src = b.dataset.full;
+                box.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            }));
+            function close() { box.classList.add('hidden'); document.body.style.overflow = ''; }
+            box.addEventListener('click', close);
+            document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !box.classList.contains('hidden')) close(); });
+        })();
 
         document.querySelectorAll('.hero-shot').forEach((el) => initCompare(el));
 
