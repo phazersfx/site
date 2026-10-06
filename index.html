@@ -391,9 +391,12 @@
                 <div>
                     <h2 class="text-3xl md:text-5xl font-bold tracking-tight mb-4">Reels</h2>
                     <div class="w-12 h-1 bg-brand-500 mb-4"></div>
-                    <p class="text-gray-400 max-w-md">Contenido vertical para marcas y redes sociales: grabación, edición, color y motion graphics.</p>
+                    <p class="text-gray-400 max-w-md">Spots y contenido para marcas y redes sociales: grabación, edición, color, música y motion graphics.</p>
                 </div>
             </div>
+
+            <!-- Featured horizontal pieces -->
+            <div id="project-featured" class="grid grid-cols-1 gap-6 mb-6 md:mb-8 max-w-5xl"></div>
 
             <!-- Dynamic Project Grid -->
             <div id="project-grid" class="flex md:grid md:grid-cols-3 gap-4 md:gap-6 overflow-x-auto md:overflow-visible snap-x snap-mandatory scroll-px-6 md:scroll-px-0 no-scrollbar -mx-6 px-6 md:mx-0 md:px-0 max-w-5xl">
@@ -770,6 +773,20 @@
         // Data Structure for Projects including 'comparison' type
         const projects = [
             {
+                id: "project-08",
+                title: "SÓR Parfum",
+                client: "SÓR Parfum",
+                category: "Spot",
+                year: 2025,
+                description: "Spot para la marca de perfumes SÓR Parfum. Edición, música y color a partir del material grabado.",
+                services: ["Edición", "Música", "Color"],
+                type: "video",
+                video: "resources/projects/sor-parfum.mp4",
+                cover: "https://placehold.co/800x450/121214/d97706?text=Video+Fallback", // Used if video fails
+                wide: true,
+                span: "w-full"
+            },
+            {
                 id: "project-07",
                 title: "Palomo Spain × Bridgerton",
                 client: "Netflix",
@@ -811,6 +828,7 @@
 
         // Rendering the Gallery Grid
         const gridContainer = document.getElementById('project-grid');
+        const featuredContainer = document.getElementById('project-featured');
         
         function renderProjects() {
             projects.forEach((proj, index) => {
@@ -820,7 +838,7 @@
                 card.style.transitionDelay = `${(index % 3) * 100}ms`;
                 
                 let mediaHTML = '';
-                const ratioClass = 'aspect-[9/16]';
+                const ratioClass = proj.wide ? 'aspect-video' : 'aspect-[9/16]';
 
                 if (proj.type === 'comparison') {
                     // Static split view for the grid card
@@ -872,7 +890,7 @@
                 `;
                 
                 card.addEventListener('click', () => openModal(proj));
-                gridContainer.appendChild(card);
+                (proj.wide ? featuredContainer : gridContainer).appendChild(card);
             });
         }
 
