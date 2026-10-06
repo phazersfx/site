@@ -99,6 +99,15 @@
         }
 
         /* --- Before/After Comparison Slider Styles --- */
+        .compare {
+            touch-action: pan-y;
+            cursor: ew-resize;
+        }
+        .compare img {
+            -webkit-user-drag: none;
+            user-select: none;
+            will-change: clip-path;
+        }
         input[type=range].comparison-range {
             -webkit-appearance: none;
             appearance: none;
@@ -189,6 +198,7 @@
             <nav class="hidden md:flex gap-8 text-sm font-medium text-gray-300">
                 <a href="#services" class="hover:text-white transition-colors">Servicios</a>
                 <a href="#projects" class="hover:text-white transition-colors">Proyectos</a>
+                <a href="#color" class="hover:text-white transition-colors">Color</a>
                 <a href="#process" class="hover:text-white transition-colors">Proceso</a>
                 <a href="#about" class="hover:text-white transition-colors">Sobre mí</a>
             </nav>
@@ -220,6 +230,7 @@
         
         <a href="#services" class="mobile-link text-3xl font-bold text-white hover:text-brand-500 transition-colors">Servicios</a>
         <a href="#projects" class="mobile-link text-3xl font-bold text-white hover:text-brand-500 transition-colors">Proyectos</a>
+        <a href="#color" class="mobile-link text-3xl font-bold text-white hover:text-brand-500 transition-colors">Color</a>
         <a href="#process" class="mobile-link text-3xl font-bold text-white hover:text-brand-500 transition-colors">Proceso</a>
         <a href="#about" class="mobile-link text-3xl font-bold text-white hover:text-brand-500 transition-colors">Sobre mí</a>
         <a href="#contact" class="mobile-link text-3xl font-bold text-brand-500 hover:text-brand-400 transition-colors mt-4">Contacto</a>
@@ -449,6 +460,70 @@
         </div>
     </div>
 
+    <!-- Color carousel -->
+    <section id="color" class="py-24 md:py-32 bg-surface-900 border-t border-surface-800">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="mb-12 reveal">
+                <h2 class="text-3xl md:text-5xl font-bold tracking-tight mb-4">Del LOG al look final</h2>
+                <div class="w-12 h-1 bg-brand-500 mb-4"></div>
+                <p class="text-gray-400 max-w-md">Desliza sobre cada imagen para comparar el material original con el color terminado.</p>
+            </div>
+            <div class="reveal">
+                <div class="relative overflow-hidden rounded border border-surface-700">
+                    <div id="color-track" class="flex transition-transform duration-500 ease-out">
+                    <div class="color-slide compare w-full shrink-0 relative aspect-[2.39/1] bg-black select-none">
+                        <img src="resources/stills/color-01-despues.jpg" alt="Después del color" loading="lazy" class="absolute inset-0 w-full h-full object-cover">
+                        <img src="resources/stills/color-01-antes.jpg" alt="Antes del color" loading="lazy" class="color-before absolute inset-0 w-full h-full object-cover" style="clip-path: inset(0 50% 0 0)">
+                        <div class="slider-line"></div>
+                        <div class="slider-handle"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5l-7 7 7 7M13 5l7 7-7 7"/></svg></div>
+                        <span class="absolute top-3 left-3 z-10 px-2 py-1 text-[10px] md:text-xs font-mono tracking-widest bg-black/60 text-gray-300 rounded">ANTES</span>
+                        <span class="absolute top-3 right-3 z-10 px-2 py-1 text-[10px] md:text-xs font-mono tracking-widest bg-black/60 text-brand-400 rounded">DESPUÉS</span>
+                    </div>
+                    <div class="color-slide compare w-full shrink-0 relative aspect-[2.39/1] bg-black select-none">
+                        <img src="resources/stills/color-02-despues.jpg" alt="Después del color" loading="lazy" class="absolute inset-0 w-full h-full object-cover">
+                        <img src="resources/stills/color-02-antes.jpg" alt="Antes del color" loading="lazy" class="color-before absolute inset-0 w-full h-full object-cover" style="clip-path: inset(0 50% 0 0)">
+                        <div class="slider-line"></div>
+                        <div class="slider-handle"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5l-7 7 7 7M13 5l7 7-7 7"/></svg></div>
+                        <span class="absolute top-3 left-3 z-10 px-2 py-1 text-[10px] md:text-xs font-mono tracking-widest bg-black/60 text-gray-300 rounded">ANTES</span>
+                        <span class="absolute top-3 right-3 z-10 px-2 py-1 text-[10px] md:text-xs font-mono tracking-widest bg-black/60 text-brand-400 rounded">DESPUÉS</span>
+                    </div>
+                    <div class="color-slide compare w-full shrink-0 relative aspect-[2.39/1] bg-black select-none">
+                        <img src="resources/stills/color-03-despues.jpg" alt="Después del color" loading="lazy" class="absolute inset-0 w-full h-full object-cover">
+                        <img src="resources/stills/color-03-antes.jpg" alt="Antes del color" loading="lazy" class="color-before absolute inset-0 w-full h-full object-cover" style="clip-path: inset(0 50% 0 0)">
+                        <div class="slider-line"></div>
+                        <div class="slider-handle"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5l-7 7 7 7M13 5l7 7-7 7"/></svg></div>
+                        <span class="absolute top-3 left-3 z-10 px-2 py-1 text-[10px] md:text-xs font-mono tracking-widest bg-black/60 text-gray-300 rounded">ANTES</span>
+                        <span class="absolute top-3 right-3 z-10 px-2 py-1 text-[10px] md:text-xs font-mono tracking-widest bg-black/60 text-brand-400 rounded">DESPUÉS</span>
+                    </div>
+                    <div class="color-slide compare w-full shrink-0 relative aspect-[2.39/1] bg-black select-none">
+                        <img src="resources/stills/color-04-despues.jpg" alt="Después del color" loading="lazy" class="absolute inset-0 w-full h-full object-cover">
+                        <img src="resources/stills/color-04-antes.jpg" alt="Antes del color" loading="lazy" class="color-before absolute inset-0 w-full h-full object-cover" style="clip-path: inset(0 50% 0 0)">
+                        <div class="slider-line"></div>
+                        <div class="slider-handle"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5l-7 7 7 7M13 5l7 7-7 7"/></svg></div>
+                        <span class="absolute top-3 left-3 z-10 px-2 py-1 text-[10px] md:text-xs font-mono tracking-widest bg-black/60 text-gray-300 rounded">ANTES</span>
+                        <span class="absolute top-3 right-3 z-10 px-2 py-1 text-[10px] md:text-xs font-mono tracking-widest bg-black/60 text-brand-400 rounded">DESPUÉS</span>
+                    </div>
+                    <div class="color-slide compare w-full shrink-0 relative aspect-[2.39/1] bg-black select-none">
+                        <img src="resources/stills/color-05-despues.jpg" alt="Después del color" loading="lazy" class="absolute inset-0 w-full h-full object-cover">
+                        <img src="resources/stills/color-05-antes.jpg" alt="Antes del color" loading="lazy" class="color-before absolute inset-0 w-full h-full object-cover" style="clip-path: inset(0 50% 0 0)">
+                        <div class="slider-line"></div>
+                        <div class="slider-handle"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5l-7 7 7 7M13 5l7 7-7 7"/></svg></div>
+                        <span class="absolute top-3 left-3 z-10 px-2 py-1 text-[10px] md:text-xs font-mono tracking-widest bg-black/60 text-gray-300 rounded">ANTES</span>
+                        <span class="absolute top-3 right-3 z-10 px-2 py-1 text-[10px] md:text-xs font-mono tracking-widest bg-black/60 text-brand-400 rounded">DESPUÉS</span>
+                    </div>
+                    </div>
+                    <button id="color-prev" class="absolute left-3 top-1/2 -translate-y-1/2 z-40 w-10 h-10 rounded-full bg-black/60 border border-surface-700 text-white hover:bg-black/80 flex items-center justify-center" aria-label="Anterior">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+                    </button>
+                    <button id="color-next" class="absolute right-3 top-1/2 -translate-y-1/2 z-40 w-10 h-10 rounded-full bg-black/60 border border-surface-700 text-white hover:bg-black/80 flex items-center justify-center" aria-label="Siguiente">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+                    </button>
+                </div>
+                <div id="color-dots" class="flex justify-center gap-3 mt-6"><button class="color-dot w-2.5 h-2.5 rounded-full bg-surface-700 transition-colors" aria-label="Imagen 1"></button><button class="color-dot w-2.5 h-2.5 rounded-full bg-surface-700 transition-colors" aria-label="Imagen 2"></button><button class="color-dot w-2.5 h-2.5 rounded-full bg-surface-700 transition-colors" aria-label="Imagen 3"></button><button class="color-dot w-2.5 h-2.5 rounded-full bg-surface-700 transition-colors" aria-label="Imagen 4"></button><button class="color-dot w-2.5 h-2.5 rounded-full bg-surface-700 transition-colors" aria-label="Imagen 5"></button></div>
+            </div>
+        </div>
+    </section>
+
     <!-- Process -->
     <section id="process" class="py-24 md:py-32 bg-surface-900 border-t border-surface-800">
         <div class="max-w-7xl mx-auto px-6">
@@ -533,21 +608,31 @@
                     <!-- Tools Component -->
                     <div class="mt-12 pt-8 border-t border-surface-700">
                         <h3 class="text-sm font-bold text-gray-500 uppercase tracking-widest mb-6">Herramientas y certificaciones</h3>
-                        <div class="flex flex-wrap gap-4">
-                            <div class="flex items-center gap-2 px-4 py-2 bg-surface-900 border border-surface-700 rounded text-sm text-gray-300">
-                                <span class="w-2 h-2 rounded-full bg-brand-500"></span>
-                                DaVinci Resolve Certified
+                        <div class="flex flex-wrap items-center gap-x-6 gap-y-5">
+                            <div class="flex items-center" title="DaVinci Resolve">
+                                <img src="./resources/badges/davinci-resolve.png" alt="DaVinci Resolve" loading="lazy" class="h-16 md:h-20 w-auto">
                             </div>
-                            <div class="flex items-center gap-2 px-4 py-2 bg-surface-900 border border-surface-700 rounded text-sm text-gray-300">
-                                <span class="w-2 h-2 rounded-full bg-brand-500"></span>
-                                Pro Tools Certified
+                            <div class="flex items-center" title="Avid Certified User · Pro Tools">
+                                <img src="./resources/badges/avid-pro-tools-user.png" alt="Avid Certified User · Pro Tools" loading="lazy" class="h-16 md:h-20 w-auto">
+                            </div>
+                            <div class="flex items-center" title="Adobe Premiere Pro · Professional">
+                                <img src="./resources/badges/premiere-pro.png" alt="Adobe Premiere Pro · Professional" loading="lazy" class="h-16 md:h-20 w-auto">
+                            </div>
+                            <div class="flex items-center" title="Adobe After Effects · Professional">
+                                <img src="./resources/badges/after-effects-pro.png" alt="Adobe After Effects · Professional" loading="lazy" class="h-16 md:h-20 w-auto">
+                            </div>
+                            <div class="flex items-center" title="Adobe · Professional Video Design">
+                                <img src="./resources/badges/professional-video-design.png" alt="Adobe · Professional Video Design" loading="lazy" class="h-16 md:h-20 w-auto">
+                            </div>
+                            <div class="flex items-center" title="EBC · Diplomado en Marketing Digital">
+                                <img src="./resources/badges/ebc-marketing-digital.png" alt="EBC · Diplomado en Marketing Digital" loading="lazy" class="h-16 md:h-20 w-auto">
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="relative reveal aspect-[4/5] rounded overflow-hidden">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQB4aKCBp8wyXx3l5LYdtVBHnZPq5etcgodIZbIgUe3ag&s" alt="José Manuel" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700">
+                    <img src="./resources/jose-manuel.jpg" alt="José Manuel Pérez" class="w-full h-full object-cover object-top">
                     <div class="absolute inset-0 border border-surface-700 rounded z-10 pointer-events-none"></div>
                 </div>
             </div>
@@ -705,6 +790,19 @@
                 cover: "https://placehold.co/800x600/121214/d97706?text=Video+Fallback", // Used if video fails
                 span: "col-span-1"
             },
+            {
+                id: "project-07",
+                title: "Palomo Spain",
+                client: "Netflix",
+                category: "Edición de video",
+                year: 2026,
+                description: "Pieza vertical para redes de Netflix sobre Palomo Spain.",
+                services: ["Edición", "Color"],
+                type: "video",
+                video: "resources/projects/palomo-spain-netflix.mp4",
+                cover: "https://placehold.co/800x600/121214/d97706?text=Video+Fallback", // Used if video fails
+                span: "col-span-1"
+            },
         ];
 
         // Rendering the Gallery Grid
@@ -803,7 +901,7 @@
             
             if (project.type === 'comparison') {
                 mediaContainer.innerHTML = `
-                    <div class="comparison-container relative w-full h-full group">
+                    <div class="comparison-container compare relative w-full h-full group">
                         <img src="${project.imageAfter}" class="absolute inset-0 w-full h-full object-cover" alt="After">
                         <img src="${project.imageBefore}" id="compare-before" class="absolute inset-0 w-full h-full object-cover" style="clip-path: inset(0 50% 0 0)" alt="Before">
                         
@@ -813,26 +911,13 @@
                                 <path d="M11 5l-7 7 7 7M13 5l7 7-7 7"/>
                             </svg>
                         </div>
-                        <input type="range" min="0" max="100" value="50" id="compare-slider" class="comparison-range" aria-label="Compare before and after">
-                        
-                        <div class="absolute top-4 left-4 bg-black/70 backdrop-blur text-white text-xs px-2 py-1 rounded font-mono pointer-events-none">RAW / BEFORE</div>
-                        <div class="absolute top-4 right-4 bg-black/70 backdrop-blur text-white text-xs px-2 py-1 rounded font-mono pointer-events-none">GRADED / AFTER</div>
+                        <div class="absolute top-4 left-4 bg-black/70 backdrop-blur text-white text-xs px-2 py-1 rounded font-mono pointer-events-none">ANTES</div>
+                        <div class="absolute top-4 right-4 bg-black/70 backdrop-blur text-white text-xs px-2 py-1 rounded font-mono pointer-events-none">DESPUÉS</div>
                     </div>
                 `;
                 
                 // Initialize Slider Logic
-                const slider = document.getElementById('compare-slider');
-                const beforeImg = document.getElementById('compare-before');
-                const sliderLine = document.getElementById('slider-line');
-                const sliderHandle = document.getElementById('slider-handle');
-
-                slider.addEventListener('input', (e) => {
-                    const val = e.target.value;
-                    // Clip path trims from the right. If value is 50%, trim right 50%.
-                    beforeImg.style.clipPath = `inset(0 ${100 - val}% 0 0)`;
-                    sliderLine.style.left = `${val}%`;
-                    sliderHandle.style.left = `${val}%`;
-                });
+                initCompare(mediaContainer.querySelector('.compare'));
 
             } else if (project.type === 'video' || project.video) {
                 // Video rendering strictly applying playback rules
@@ -919,6 +1004,68 @@
                 });
             }, 100);
         });
+
+        // Before/after slider driven by pointer events (smooth on touch, vertical scroll still works)
+        function initCompare(el, onInteract) {
+            const before = el.querySelector('.color-before, #compare-before');
+            const line = el.querySelector('.slider-line');
+            const handle = el.querySelector('.slider-handle');
+            let dragging = false;
+            let pending = null;
+
+            function render() {
+                const v = pending;
+                pending = null;
+                before.style.clipPath = `inset(0 ${100 - v}% 0 0)`;
+                line.style.left = `${v}%`;
+                handle.style.left = `${v}%`;
+            }
+            function setFromEvent(e) {
+                const rect = el.getBoundingClientRect();
+                const v = Math.min(100, Math.max(0, ((e.clientX - rect.left) / rect.width) * 100));
+                if (pending === null) requestAnimationFrame(render);
+                pending = v;
+            }
+            el.addEventListener('pointerdown', (e) => {
+                if (e.target.closest('button')) return;
+                dragging = true;
+                el.setPointerCapture(e.pointerId);
+                setFromEvent(e);
+                if (onInteract) onInteract();
+            });
+            el.addEventListener('pointermove', (e) => { if (dragging) setFromEvent(e); });
+            el.addEventListener('pointerup', () => { dragging = false; });
+            el.addEventListener('pointercancel', () => { dragging = false; });
+        }
+
+        // Color before/after carousel
+        (function() {
+            const track = document.getElementById('color-track');
+            if (!track) return;
+            const slides = track.querySelectorAll('.color-slide');
+            const dots = document.querySelectorAll('.color-dot');
+            let current = 0;
+            let timer = null;
+
+            slides.forEach((slide) => initCompare(slide, stopAuto));
+
+            function goTo(i) {
+                current = (i + slides.length) % slides.length;
+                track.style.transform = `translateX(-${current * 100}%)`;
+                dots.forEach((d, j) => {
+                    d.classList.toggle('bg-brand-500', j === current);
+                    d.classList.toggle('bg-surface-700', j !== current);
+                });
+            }
+            function stopAuto() { clearInterval(timer); timer = null; }
+
+            document.getElementById('color-prev').addEventListener('click', () => { stopAuto(); goTo(current - 1); });
+            document.getElementById('color-next').addEventListener('click', () => { stopAuto(); goTo(current + 1); });
+            dots.forEach((d, j) => d.addEventListener('click', () => { stopAuto(); goTo(j); }));
+
+            goTo(0);
+            timer = setInterval(() => goTo(current + 1), 6000);
+        })();
     </script>
 </body>
 </html>
