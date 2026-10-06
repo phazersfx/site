@@ -197,8 +197,10 @@
             <!-- Desktop Nav -->
             <nav class="hidden md:flex gap-8 text-sm font-medium text-gray-300">
                 <a href="#services" class="hover:text-white transition-colors">Servicios</a>
-                <a href="#projects" class="hover:text-white transition-colors">Proyectos</a>
+                <a href="#fotos" class="hover:text-white transition-colors">Fotos</a>
+                <a href="#projects" class="hover:text-white transition-colors">Reels</a>
                 <a href="#color" class="hover:text-white transition-colors">Color</a>
+                <a href="#musica" class="hover:text-white transition-colors">Música</a>
                 <a href="#process" class="hover:text-white transition-colors">Proceso</a>
                 <a href="#about" class="hover:text-white transition-colors">Sobre mí</a>
             </nav>
@@ -229,8 +231,10 @@
         </button>
         
         <a href="#services" class="mobile-link text-3xl font-bold text-white hover:text-brand-500 transition-colors">Servicios</a>
-        <a href="#projects" class="mobile-link text-3xl font-bold text-white hover:text-brand-500 transition-colors">Proyectos</a>
+        <a href="#fotos" class="mobile-link text-3xl font-bold text-white hover:text-brand-500 transition-colors">Fotos</a>
+        <a href="#projects" class="mobile-link text-3xl font-bold text-white hover:text-brand-500 transition-colors">Reels</a>
         <a href="#color" class="mobile-link text-3xl font-bold text-white hover:text-brand-500 transition-colors">Color</a>
+        <a href="#musica" class="mobile-link text-3xl font-bold text-white hover:text-brand-500 transition-colors">Música</a>
         <a href="#process" class="mobile-link text-3xl font-bold text-white hover:text-brand-500 transition-colors">Proceso</a>
         <a href="#about" class="mobile-link text-3xl font-bold text-white hover:text-brand-500 transition-colors">Sobre mí</a>
         <a href="#contact" class="mobile-link text-3xl font-bold text-brand-500 hover:text-brand-400 transition-colors mt-4">Contacto</a>
@@ -242,15 +246,24 @@
         <div class="absolute inset-0 z-0 bg-surface-800 pointer-events-none">
             <video 
                 id="hero-video"
-                src="resources/videos/idea.mp4" 
+                data-src-mobile="resources/videos/fondo-movil.mp4"
+                data-src-desktop="resources/videos/fondo-escritorio.mp4"
+                poster="resources/videos/fondo-poster.jpg"
                 autoplay 
                 loop 
                 muted 
                 playsinline 
                 webkit-playsinline
                 preload="auto"
-                class="w-full h-full object-cover opacity-40 pointer-events-none">
+                class="w-full h-full object-cover opacity-60 pointer-events-none">
             </video>
+            <script>
+                // Vertical cut on portrait screens, horizontal crop elsewhere
+                (function() {
+                    const v = document.getElementById('hero-video');
+                    v.src = window.matchMedia('(max-aspect-ratio: 1/1)').matches ? v.dataset.srcMobile : v.dataset.srcDesktop;
+                })();
+            </script>
             <div class="absolute inset-0 bg-gradient-to-t from-surface-900 via-transparent to-surface-900/50"></div>
             <div class="absolute inset-0 bg-gradient-to-r from-surface-900 via-transparent to-transparent"></div>
         </div>
@@ -382,19 +395,52 @@
         </div>
     </section>
 
+    <!-- Fotos -->
+    <section id="fotos" class="py-24 md:py-32 bg-surface-900 border-t border-surface-800">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="mb-12 reveal">
+                <h2 class="text-3xl md:text-5xl font-bold tracking-tight mb-4">Fotos</h2>
+                <div class="w-12 h-1 bg-brand-500 mb-4"></div>
+                <p class="text-gray-400 max-w-md">Fotografía de producto con iluminación cuidada y color propio.</p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 reveal">
+                <button class="foto-item group relative aspect-video overflow-hidden rounded border border-surface-700 bg-black" data-full="resources/photos/foto-01.jpg" aria-label="Ver foto 1">
+                    <img src="resources/photos/foto-01.jpg" alt="Fotografía de producto 1" loading="lazy" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                </button>
+                <button class="foto-item group relative aspect-video overflow-hidden rounded border border-surface-700 bg-black" data-full="resources/photos/foto-02.jpg" aria-label="Ver foto 2">
+                    <img src="resources/photos/foto-02.jpg" alt="Fotografía de producto 2" loading="lazy" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                </button>
+                <button class="foto-item group relative aspect-video overflow-hidden rounded border border-surface-700 bg-black" data-full="resources/photos/foto-03.jpg" aria-label="Ver foto 3">
+                    <img src="resources/photos/foto-03.jpg" alt="Fotografía de producto 3" loading="lazy" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                </button>
+                <button class="foto-item group relative aspect-video overflow-hidden rounded border border-surface-700 bg-black" data-full="resources/photos/foto-04.jpg" aria-label="Ver foto 4">
+                    <img src="resources/photos/foto-04.jpg" alt="Fotografía de producto 4" loading="lazy" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fotos lightbox -->
+    <div id="foto-lightbox" class="fixed inset-0 z-[120] hidden bg-black/95 flex items-center justify-center p-4 cursor-zoom-out">
+        <img id="foto-lightbox-img" src="" alt="Fotografía ampliada" class="max-w-full max-h-full object-contain">
+    </div>
+
     <!-- Projects -->
     <section id="projects" class="py-24 md:py-32 bg-surface-900 border-t border-surface-800">
         <div class="max-w-7xl mx-auto px-6">
             <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 reveal">
                 <div>
-                    <h2 class="text-3xl md:text-5xl font-bold tracking-tight mb-4">Trabajos Seleccionados</h2>
+                    <h2 class="text-3xl md:text-5xl font-bold tracking-tight mb-4">Reels</h2>
                     <div class="w-12 h-1 bg-brand-500 mb-4"></div>
-                    <p class="text-gray-400 max-w-md">Una muestra de proyectos recientes de video, color, contenido para redes y producción musical.</p>
+                    <p class="text-gray-400 max-w-md">Spots y contenido para marcas y redes sociales: grabación, edición, color, música y motion graphics.</p>
                 </div>
             </div>
 
+            <!-- Featured horizontal pieces -->
+            <div id="project-featured" class="grid grid-cols-1 gap-6 mb-6 md:mb-8 max-w-5xl"></div>
+
             <!-- Dynamic Project Grid -->
-            <div id="project-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-auto">
+            <div id="project-grid" class="flex md:grid md:grid-cols-3 gap-4 md:gap-6 overflow-x-auto md:overflow-visible snap-x snap-mandatory scroll-px-6 md:scroll-px-0 no-scrollbar -mx-6 px-6 md:mx-0 md:px-0 max-w-5xl">
                 <!-- Javascript will populate this -->
             </div>
         </div>
@@ -468,6 +514,16 @@
                 <div class="w-12 h-1 bg-brand-500 mb-4"></div>
                 <p class="text-gray-400 max-w-md">Desliza sobre cada imagen para comparar el material original con el color terminado.</p>
             </div>
+            <div class="reveal mb-10">
+                <div class="hero-shot compare relative w-full aspect-video bg-black select-none rounded overflow-hidden border border-surface-700">
+                    <img src="resources/stills/hero-shot-despues.jpg" alt="Hero shot con color final" class="absolute inset-0 w-full h-full object-cover">
+                    <img src="resources/stills/hero-shot-antes.jpg" alt="Hero shot en LOG" class="color-before absolute inset-0 w-full h-full object-cover" style="clip-path: inset(0 50% 0 0)">
+                    <div class="slider-line"></div>
+                    <div class="slider-handle"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5l-7 7 7 7M13 5l7 7-7 7"/></svg></div>
+                    <span class="absolute top-3 left-3 md:top-5 md:left-5 z-10 px-2 py-1 text-[10px] md:text-xs font-mono tracking-widest bg-black/60 text-gray-300 rounded">ANTES</span>
+                    <span class="absolute top-3 right-3 md:top-5 md:right-5 z-10 px-2 py-1 text-[10px] md:text-xs font-mono tracking-widest bg-black/60 text-brand-400 rounded">DESPUÉS</span>
+                </div>
+            </div>
             <div class="reveal">
                 <div class="relative overflow-hidden rounded border border-surface-700">
                     <div id="color-track" class="flex transition-transform duration-500 ease-out">
@@ -511,6 +567,22 @@
                         <span class="absolute top-3 left-3 z-10 px-2 py-1 text-[10px] md:text-xs font-mono tracking-widest bg-black/60 text-gray-300 rounded">ANTES</span>
                         <span class="absolute top-3 right-3 z-10 px-2 py-1 text-[10px] md:text-xs font-mono tracking-widest bg-black/60 text-brand-400 rounded">DESPUÉS</span>
                     </div>
+                    <div class="color-slide compare w-full shrink-0 relative aspect-[2.39/1] bg-black select-none">
+                        <img src="resources/stills/color-06-despues.jpg" alt="Después del color" loading="lazy" class="absolute inset-0 w-full h-full object-cover">
+                        <img src="resources/stills/color-06-antes.jpg" alt="Antes del color" loading="lazy" class="color-before absolute inset-0 w-full h-full object-cover" style="clip-path: inset(0 50% 0 0)">
+                        <div class="slider-line"></div>
+                        <div class="slider-handle"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5l-7 7 7 7M13 5l7 7-7 7"/></svg></div>
+                        <span class="absolute top-3 left-3 z-10 px-2 py-1 text-[10px] md:text-xs font-mono tracking-widest bg-black/60 text-gray-300 rounded">ANTES</span>
+                        <span class="absolute top-3 right-3 z-10 px-2 py-1 text-[10px] md:text-xs font-mono tracking-widest bg-black/60 text-brand-400 rounded">DESPUÉS</span>
+                    </div>
+                    <div class="color-slide compare w-full shrink-0 relative aspect-[2.39/1] bg-black select-none">
+                        <img src="resources/stills/color-07-despues.jpg" alt="Después del color" loading="lazy" class="absolute inset-0 w-full h-full object-cover">
+                        <img src="resources/stills/color-07-antes.jpg" alt="Antes del color" loading="lazy" class="color-before absolute inset-0 w-full h-full object-cover" style="clip-path: inset(0 50% 0 0)">
+                        <div class="slider-line"></div>
+                        <div class="slider-handle"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5l-7 7 7 7M13 5l7 7-7 7"/></svg></div>
+                        <span class="absolute top-3 left-3 z-10 px-2 py-1 text-[10px] md:text-xs font-mono tracking-widest bg-black/60 text-gray-300 rounded">ANTES</span>
+                        <span class="absolute top-3 right-3 z-10 px-2 py-1 text-[10px] md:text-xs font-mono tracking-widest bg-black/60 text-brand-400 rounded">DESPUÉS</span>
+                    </div>
                     </div>
                     <button id="color-prev" class="absolute left-3 top-1/2 -translate-y-1/2 z-40 w-10 h-10 rounded-full bg-black/60 border border-surface-700 text-white hover:bg-black/80 flex items-center justify-center" aria-label="Anterior">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
@@ -519,7 +591,35 @@
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
                     </button>
                 </div>
-                <div id="color-dots" class="flex justify-center gap-3 mt-6"><button class="color-dot w-2.5 h-2.5 rounded-full bg-surface-700 transition-colors" aria-label="Imagen 1"></button><button class="color-dot w-2.5 h-2.5 rounded-full bg-surface-700 transition-colors" aria-label="Imagen 2"></button><button class="color-dot w-2.5 h-2.5 rounded-full bg-surface-700 transition-colors" aria-label="Imagen 3"></button><button class="color-dot w-2.5 h-2.5 rounded-full bg-surface-700 transition-colors" aria-label="Imagen 4"></button><button class="color-dot w-2.5 h-2.5 rounded-full bg-surface-700 transition-colors" aria-label="Imagen 5"></button></div>
+                <div id="color-dots" class="flex justify-center gap-3 mt-6"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Música -->
+    <section id="musica" class="py-24 md:py-32 bg-surface-900 border-t border-surface-800">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="mb-12 reveal">
+                <h2 class="text-3xl md:text-5xl font-bold tracking-tight mb-4">Música</h2>
+                <div class="w-12 h-1 bg-brand-500 mb-4"></div>
+                <p class="text-gray-400 max-w-md">Producción, grabación, mezcla y mastering para artistas.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center reveal">
+                <div class="relative aspect-square w-full max-w-md rounded overflow-hidden border border-surface-700 bg-black">
+                    <video src="resources/projects/La Rola de Siempre.mp4" class="absolute inset-0 w-full h-full object-cover" autoplay muted loop playsinline controls></video>
+                </div>
+                <div>
+                    <p class="text-xs font-mono text-brand-500 mb-2 uppercase">Producción musical · 2026</p>
+                    <h3 class="text-2xl md:text-4xl font-bold text-white mb-2">La Rola de Siempre</h3>
+                    <p class="text-lg text-gray-400 mb-6">Ariel Muhlia</p>
+                    <p class="text-gray-300 leading-relaxed mb-6">Producción musical completa del tema: grabación, mezcla y mastering.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-surface-800 border border-surface-700 rounded-full text-xs text-gray-300">Producción</span>
+                        <span class="px-3 py-1 bg-surface-800 border border-surface-700 rounded-full text-xs text-gray-300">Grabación</span>
+                        <span class="px-3 py-1 bg-surface-800 border border-surface-700 rounded-full text-xs text-gray-300">Mezcla</span>
+                        <span class="px-3 py-1 bg-surface-800 border border-surface-700 rounded-full text-xs text-gray-300">Mastering</span>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -714,81 +814,18 @@
         // Data Structure for Projects including 'comparison' type
         const projects = [
             {
-                id: "project-01",
-                title: "Color Cinematográfico",
-                client: "Indie Studio",
-                category: "Color",
-                year: 2026,
-                description: "Etalonaje y corrección de color para cortometraje narrativo. Se buscó un look cinematográfico frío, aumentando el contraste y dirigiendo la mirada mediante viñeteado y saturación selectiva.",
-                services: ["Color grading", "Desarrollo de look"],
-                type: "comparison",
-                imageBefore: "resources/projects/Log_lealtad_1.png",
-                imageAfter: "resources/projects/Log_lealtad_2.png",
-                span: "md:col-span-2 lg:col-span-2"
-            },
-            {
-                id: "project-02",
-                title: "Contenido para Redes",
-                client: "MAUPO Alta pastelería",
-                category: "Contenido para redes",
+                id: "project-08",
+                title: "SÓR Parfum",
+                client: "SÓR Parfum",
+                category: "Spot",
                 year: 2025,
-                description: "Producción y generación de contenido para redes sociales: edición de video, color, motion graphics y diseño sonoro.",
-                services: ["Edición", "Color", "Motion graphics", "Diseño sonoro"],
-                type: "image",
-                cover: "resources/projects/MAUPO_IMAGE.jpeg",
-                span: "col-span-1"
-            },
-            {
-                id: "project-03",
-                title: "Comercial Repostería",
-                client: "MAUPO Alta pastelería",
-                category: "Edición de video",
-                year: 2026,
-                description: "Edición acelerada y tratamiento de color estilizado para campaña digital de marca de repostería fina.",
-                services: ["Edición", "Color", "Motion graphics"],
+                description: "Spot para la marca de perfumes SÓR Parfum. Edición, música y color a partir del material grabado.",
+                services: ["Edición", "Música", "Color"],
                 type: "video",
-                video: "resources/projects/JuBuk-PYMp2_576.mp4", 
-                cover: "https://placehold.co/800x600/121214/d97706?text=Video+Fallback", // Used if video fails
-                span: "col-span-1"
-            },
-            {
-                id: "project-04",
-                title: "Log_Hermanas2",
-                client: "Indie Studio",
-                category: "Color",
-                year: 2024,
-                description: "Tratamiento de color de alto contraste para fashion film. Equilibrio de tonos de piel y saturación de prendas.",
-                services: ["Color grading", "Corrección de color"],
-                type: "comparison",
-                imageBefore: "resources/projects/Log_hermanas2_1.png",
-                imageAfter: "resources/projects/Log_hermanas2_2.png",
-                span: "md:col-span-2 lg:col-span-2"
-            },
-            {
-                id: "project-05",
-                title: "Log_LEALTAD 2",
-                client: "Indie Studio",
-                category: "Color",
-                year: 2024,
-                description: "Tratamiento de color de alto contraste para fashion film. Equilibrio de tonos de piel y saturación de prendas.",
-                services: ["Color grading", "Corrección de color"],
-                type: "comparison",
-                imageBefore: "resources/projects/Log_lealtad_3.png",
-                imageAfter: "resources/projects/Log_lealtad_4.png",
-                span: "md:col-span-2 lg:col-span-2"
-            },
-            {
-                id: "project-06",
-                title: "La Rola de Siempre",
-                client: "Ariel Muhlia",
-                category: "Producción musical",
-                year: 2026,
-                description: "Producción musical completa: grabación, mezcla y mastering.",
-                services: ["Producción", "Grabación", "Mezcla", "Mastering"],
-                type: "video",
-                video: "resources/projects/La Rola de Siempre.mp4", 
-                cover: "https://placehold.co/800x600/121214/d97706?text=Video+Fallback", // Used if video fails
-                span: "col-span-1"
+                video: "resources/projects/sor-parfum.mp4",
+                cover: "https://placehold.co/800x450/121214/d97706?text=Video+Fallback", // Used if video fails
+                wide: true,
+                span: "w-full"
             },
             {
                 id: "project-07",
@@ -801,12 +838,38 @@
                 type: "video",
                 video: "resources/projects/palomo-spain-netflix.mp4",
                 cover: "https://placehold.co/800x600/121214/d97706?text=Video+Fallback", // Used if video fails
-                span: "col-span-1"
+                span: "w-[72%] sm:w-[45%] md:w-auto shrink-0 snap-start"
+            },
+            {
+                id: "project-03",
+                title: "Comercial Repostería",
+                client: "MAUPO Alta pastelería",
+                category: "Edición de video",
+                year: 2026,
+                description: "Edición acelerada y tratamiento de color estilizado para campaña digital de marca de repostería fina.",
+                services: ["Edición", "Color", "Motion graphics"],
+                type: "video",
+                video: "resources/projects/JuBuk-PYMp2_576.mp4", 
+                cover: "https://placehold.co/800x600/121214/d97706?text=Video+Fallback", // Used if video fails
+                span: "w-[72%] sm:w-[45%] md:w-auto shrink-0 snap-start"
+            },
+            {
+                id: "project-02",
+                title: "Contenido para Redes",
+                client: "MAUPO Alta pastelería",
+                category: "Contenido para redes",
+                year: 2025,
+                description: "Producción y generación de contenido para redes sociales: edición de video, color, motion graphics y diseño sonoro.",
+                services: ["Edición", "Color", "Motion graphics", "Diseño sonoro"],
+                type: "image",
+                cover: "resources/projects/MAUPO_IMAGE.jpeg",
+                span: "w-[72%] sm:w-[45%] md:w-auto shrink-0 snap-start"
             },
         ];
 
         // Rendering the Gallery Grid
         const gridContainer = document.getElementById('project-grid');
+        const featuredContainer = document.getElementById('project-featured');
         
         function renderProjects() {
             projects.forEach((proj, index) => {
@@ -816,7 +879,7 @@
                 card.style.transitionDelay = `${(index % 3) * 100}ms`;
                 
                 let mediaHTML = '';
-                const ratioClass = (proj.span && proj.span.includes('col-span-2')) ? 'aspect-video' : 'aspect-[4/3]';
+                const ratioClass = proj.wide ? 'aspect-video' : 'aspect-[9/16]';
 
                 if (proj.type === 'comparison') {
                     // Static split view for the grid card
@@ -868,7 +931,7 @@
                 `;
                 
                 card.addEventListener('click', () => openModal(proj));
-                gridContainer.appendChild(card);
+                (proj.wide ? featuredContainer : gridContainer).appendChild(card);
             });
         }
 
@@ -1038,12 +1101,35 @@
             el.addEventListener('pointercancel', () => { dragging = false; });
         }
 
+        // Photo lightbox
+        (function() {
+            const box = document.getElementById('foto-lightbox');
+            const img = document.getElementById('foto-lightbox-img');
+            document.querySelectorAll('.foto-item').forEach((b) => b.addEventListener('click', () => {
+                img.src = b.dataset.full;
+                box.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            }));
+            function close() { box.classList.add('hidden'); document.body.style.overflow = ''; }
+            box.addEventListener('click', close);
+            document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !box.classList.contains('hidden')) close(); });
+        })();
+
+        document.querySelectorAll('.hero-shot').forEach((el) => initCompare(el));
+
         // Color before/after carousel
         (function() {
             const track = document.getElementById('color-track');
             if (!track) return;
             const slides = track.querySelectorAll('.color-slide');
-            const dots = document.querySelectorAll('.color-dot');
+            const dotsWrap = document.getElementById('color-dots');
+            slides.forEach((_, j) => {
+                const b = document.createElement('button');
+                b.className = 'color-dot w-2.5 h-2.5 rounded-full bg-surface-700 transition-colors';
+                b.setAttribute('aria-label', `Imagen ${j + 1}`);
+                dotsWrap.appendChild(b);
+            });
+            const dots = dotsWrap.querySelectorAll('.color-dot');
             let current = 0;
             let timer = null;
 
